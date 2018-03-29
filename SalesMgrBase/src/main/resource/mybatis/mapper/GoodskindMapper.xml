@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="salesmgr.base.dao.GoodskindMapper" >
+  <select id="getList" resultType="salesmgr.base.model.Goodskind" parameterType="salesmgr.base.model.Goodskind" >
+    select * from goodskind
+    where 1=1
+    <if test="goodskindid != null" >
+      and goodsKindId = #{goodskindid}
+    </if>
+    <if test="goodskindname != null" >
+      and goodsKindName = #{goodskindname}
+    </if>
+    <if test="goodskindtime != null" >
+      and goodsKindTime = #{goodskindtime}
+    </if>
+  </select>
+  
+  <select id="getSingle" resultType="salesmgr.base.model.Goodskind" >
+    select * from goodskind
+    where goodsKindId = #{id}
+    limit 0,1
+  </select>
+  
+  <insert id="insert" parameterType="salesmgr.base.model.Goodskind" >
+    insert into goodskind
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodskindid != null" >
+        goodsKindId,
+      </if>
+      <if test="goodskindname != null" >
+        goodsKindName,
+      </if>
+      <if test="goodskindtime != null" >
+        goodsKindTime
+      </if>
+    </trim>
+    <trim prefix="values(" suffix=")" suffixOverrides="," >
+      <if test="goodskindid != null" >
+        #{goodskindid},
+      </if>
+      <if test="goodskindname != null" >
+        #{goodskindname},
+      </if>
+      <if test="goodskindtime != null" >
+        #{goodskindtime}
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="update" parameterType="salesmgr.base.model.Goodskind" >
+    update goodskind
+    <set >
+      <if test="goodskindname != null" >
+        goodsKindName = #{goodskindname},
+      </if>
+      <if test="goodskindtime != null" >
+        goodsKindTime = #{goodskindtime}
+      </if>
+    </set>
+    where
+    goodsKindId = #{goodskindid}
+  </update>
+  
+  <delete id="batchDelete" >
+    delete from goodskind
+    where goodsKindId in(
+    <foreach item="item" collection="list" separator="," >
+      #{item}
+    </foreach>
+    )
+  </delete>
+  
+  <select id="getListWithPage" resultType="salesmgr.base.model.Goodskind" parameterType="salesmgr.base.model.Goodskind" >
+    select * from goodskind
+    where 1=1
+    <if test="goodskindid != null" >
+      and goodsKindId = #{goodskindid}
+    </if>
+    <if test="goodskindname != null" >
+      and goodsKindName = #{goodskindname}
+    </if>
+    <if test="goodskindtime != null" >
+      and goodsKindTime = #{goodskindtime}
+    </if>
+  </select>
+  
+  <select id="count" resultType="java.lang.Long" parameterType="salesmgr.base.model.Goodskind" >
+    select count(*) from goodskind
+    where 1=1
+    <if test="goodskindid != null" >
+      and goodsKindId = #{goodskindid}
+    </if>
+    <if test="goodskindname != null" >
+      and goodsKindName = #{goodskindname}
+    </if>
+    <if test="goodskindtime != null" >
+      and goodsKindTime = #{goodskindtime}
+    </if>
+  </select>
+  
+</mapper>
