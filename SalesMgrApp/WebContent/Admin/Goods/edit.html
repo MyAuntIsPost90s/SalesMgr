@@ -254,7 +254,7 @@
             , data: {basePath:'/Uploadfile/goodsimg/'}
             , url: Config.UrlHead + '/uploader/upload' //上传接口
             , done: function (res) {
-                var tr='<tr data-src="'+res.data+'"><td><button class="layui-btn layui-btn-xs layui-btn-danger"><i class="layui-icon">&#xe640;</i>移除</button></td><td><img src="'+ Config.UrlHead+res.data +'" width="300px""></td></tr>'
+                var tr='<tr data-src="'+res.data+'"><td><button class="layui-btn layui-btn-xs layui-btn-danger" onclick="$(this).parent().parent().remove()"><i class="layui-icon">&#xe640;</i>移除</button></td><td><img src="'+ Config.UrlHead+res.data +'" width="300px""></td></tr>'
                 $('#tb-goodsimg').append(tr);
             }
         });
