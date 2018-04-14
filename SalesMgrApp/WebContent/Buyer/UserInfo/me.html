@@ -113,7 +113,7 @@
             return;
         }
         if(imgurl!=''&&imgurl!=null){
-            postData.headimgurl=imgurl;
+            postData.userheadimgurl=imgurl;
         }
         $.post(Config.UrlHead + '/userInfo/update'
             ,postData
@@ -128,9 +128,9 @@
             ,function (data) {
                 if(data.code==1){
                     user=data.data;
-                    if(user.headimgurl!=null&&user.headimgurl!='') {
-                        $('#img-userhead').attr('data-src', user.headimgurl);
-                        $('#img-userhead').attr('src', Config.UrlHead + user.headimgurl);
+                    if(user.userheadimgurl!=null&&user.userheadimgurl!='') {
+                        $('#img-userhead').attr('data-src', user.userheadimgurl);
+                        $('#img-userhead').attr('src', Config.UrlHead + user.userheadimgurl);
                     }
                     FormUtil.loadForm('#form-me',user);
                     return;

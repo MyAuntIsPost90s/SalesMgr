@@ -101,8 +101,8 @@
         $.post(Config.UrlHead+'/userInfo/nowUser'
             ,function (data) {
                 if(data.code==1){
-                    if(data.data.headimgurl!=null&&data.data.headimgurl!=''){
-                        $('#img-userhead').attr('src',Config.UrlHead+data.data.headimgurl);
+                    if(data.data.userheadimgurl!=null&&data.data.userheadimgurl!=''){
+                        $('#img-userhead').attr('src',Config.UrlHead+data.data.userheadimgurl);
                     }
                     $('#div-username').html(data.data.username);
                     $('#div-realname').html(data.data.realname);
