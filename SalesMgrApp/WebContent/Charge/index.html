@@ -30,7 +30,7 @@
                 <div id="div-username">root</div>
             </div>
         </div>
-        <ul class="layui-nav layui-nav-tree">
+        <ul class="layui-nav layui-nav-tree" lay-filter="test">
             <li class="layui-nav-item layui-nav-itemed">
                 <a href="javascript:;">人员管理</a>
                 <dl class="layui-nav-child">
@@ -40,10 +40,10 @@
                     <dd><a data-id="UserInfo/buyman_list.html">采购员管理</a></dd>
                 </dl>
                 <dl class="layui-nav-child">
-                    <dd><a data-id="UserInfo/adminman_list.html">管理员管理</a></dd>
+                    <dd><a data-id="AddressList/list.html">通讯录管理</a></dd>
                 </dl>
                 <dl class="layui-nav-child">
-                    <dd><a data-id="AddressList/list.html">通讯录管理</a></dd>
+                    <dd><a data-id="Finance/mansalary_list.html">我的工资</a></dd>
                 </dl>
                 <dl class="layui-nav-child">
                     <dd><a data-id="UserInfo/me.html">个人中心</a></dd>
@@ -64,15 +64,6 @@
                     <dd><a data-id="OrderForm/order_list.html">订单记录</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">财务管理</a>
-                <dl class="layui-nav-child">
-                    <dd><a data-id="Finance/mansalary_list.html">人员工资</a></dd>
-                </dl>
-                <dl class="layui-nav-child">
-                    <dd><a data-id="Finance/form.html">财务报表</a></dd>
-                </dl>
-            </li>
         </ul>
     </div>
 
@@ -83,7 +74,7 @@
         </div>
     </div>
 </div>
-<div class="layui-footer layui-bg-black layout-footer"> build by lingshi </div>
+<div class="layui-footer layui-bg-black"> build by lingshi </div>
 
 <script src="../Contents/lib/layui/layui.all.js"></script>
 <script>

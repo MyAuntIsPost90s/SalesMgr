@@ -16,6 +16,9 @@
     <if test="userid != null" >
       and userId = #{userid}
     </if>
+    <if test="ordernote != null" >
+      and orderNote = #{ordernote}
+    </if>
   </select>
   
   <select id="getSingle" resultType="salesmgr.base.model.Orderform" >
@@ -37,7 +40,10 @@
         orderPrice,
       </if>
       <if test="userid != null" >
-        userId
+        userId,
+      </if>
+      <if test="ordernote != null" >
+        orderNote
       </if>
     </trim>
     <trim prefix="values(" suffix=")" suffixOverrides="," >
@@ -51,7 +57,10 @@
         #{orderprice},
       </if>
       <if test="userid != null" >
-        #{userid}
+        #{userid},
+      </if>
+      <if test="ordernote != null" >
+        #{ordernote}
       </if>
     </trim>
   </insert>
@@ -66,7 +75,10 @@
         orderPrice = #{orderprice},
       </if>
       <if test="userid != null" >
-        userId = #{userid}
+        userId = #{userid},
+      </if>
+      <if test="ordernote != null" >
+        orderNote = #{ordernote}
       </if>
     </set>
     where
@@ -97,6 +109,10 @@
     <if test="userid != null" >
       and userId = #{userid}
     </if>
+    <if test="ordernote != null" >
+      and orderNote = #{ordernote}
+    </if>
+    order by orderTime desc
   </select>
   
   <select id="count" resultType="java.lang.Long" parameterType="salesmgr.base.model.Orderform" >
@@ -113,6 +129,9 @@
     </if>
     <if test="userid != null" >
       and userId = #{userid}
+    </if>
+    <if test="ordernote != null" >
+      and orderNote = #{ordernote}
     </if>
   </select>
   

@@ -4,6 +4,7 @@ import java.util.List;
 
 import salesmgr.base.model.Orderform;
 import salesmgr.base.model.Ordergoods;
+import salesmgr.base.model.dto.UserOrderDto;
 import salesmgr.uimodel.EUIPageList;
 
 public interface OrderFormService {
@@ -23,7 +24,7 @@ public interface OrderFormService {
 	 * @param rows
 	 * @return
 	 */
-	EUIPageList<Orderform> list(Orderform orderform, int page, int rows);
+	EUIPageList<UserOrderDto> list(Orderform orderform, int page, int rows);
 
 	/**
 	 * 添加
@@ -31,7 +32,7 @@ public interface OrderFormService {
 	 * @param userinfo
 	 * @param stringBuilder
 	 */
-	void add(List<Ordergoods> ordergoods, String userid) throws Exception;
+	void add(List<Ordergoods> ordergoods, String ordernote, String userid) throws Exception;
 
 	/**
 	 * 修改

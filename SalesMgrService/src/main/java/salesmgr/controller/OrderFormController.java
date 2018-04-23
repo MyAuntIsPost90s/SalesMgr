@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import lingshi.web.model.RequestHolder;
 import salesmgr.base.enums.UserInfoEnum.UserType;
 import salesmgr.base.model.Orderform;
-import salesmgr.base.model.Ordergoods;
 import salesmgr.base.model.Userinfo;
+import salesmgr.base.model.dto.UserOrderDto;
+import salesmgr.model.dto.AddOrderDto;
 import salesmgr.service.OrderFormService;
 import salesmgr.uimodel.EUIPageList;
 
@@ -42,10 +43,10 @@ public class OrderFormController {
 		RequestHolder requestHolder = RequestHolder.get(request, response);
 		try {
 			Userinfo nowUser = (Userinfo) requestHolder.getClientUser();
-			if (nowUser.getUsertype() != UserType.ADMIN.value) {
+			if (nowUser.getUsertype() != UserType.ADMIN.value && nowUser.getUsertype() != UserType.CHARGE.value) {
 				orderform.setUserid(nowUser.getUserid());
 			}
-			EUIPageList<Orderform> list = orderFormService.list(orderform, page, rows);
+			EUIPageList<UserOrderDto> list = orderFormService.list(orderform, page, rows);
 			requestHolder.success(list);
 		} catch (Exception e) {
 			requestHolder.err("操作失败", e);
@@ -61,12 +62,11 @@ public class OrderFormController {
 	 */
 	@ResponseBody
 	@RequestMapping("/add")
-	public void add(HttpServletRequest request, HttpServletResponse response,
-			@RequestBody List<Ordergoods> ordergoods) {
+	public void add(HttpServletRequest request, HttpServletResponse response, @RequestBody AddOrderDto addOrderDto) {
 		RequestHolder requestHolder = RequestHolder.get(request, response);
 		try {
 			Userinfo userinfo = (Userinfo) requestHolder.getClientUser();
-			orderFormService.add(ordergoods, userinfo.getUserid());
+			orderFormService.add(addOrderDto.getList(), addOrderDto.getOrdernote(), userinfo.getUserid());
 			requestHolder.success("操作成功，请在订单记录中查看");
 		} catch (Exception e) {
 			requestHolder.err("操作失败", e);

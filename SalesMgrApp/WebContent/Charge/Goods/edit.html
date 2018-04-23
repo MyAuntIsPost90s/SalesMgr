@@ -43,14 +43,14 @@
             <div class="layui-form-item">
                 <label class="layui-form-label layui-inline" style="width: 50px">成本</label>
                 <div class="layui-input-inline" style="width: 170px;">
-                    <input type="number" value="0" name="goodscost" readonly placeholder="请输入成本" data-valid="name:'成本',length:[1,5]"
+                    <input type="number" value="0" name="goodscost" placeholder="请输入成本" data-valid="name:'成本',length:[1,5]"
                            autocomplete="off" class="layui-input"  />
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label layui-inline" style="width: 50px">售价</label>
                 <div class="layui-input-inline" style="width: 170px;">
-                    <input type="number" value="0" name="goodsprice" readonly placeholder="请输入售价" data-valid="name:'售价',length:[1,5]"
+                    <input type="number" value="0" name="goodsprice" placeholder="请输入售价" data-valid="name:'售价',length:[1,5]"
                            autocomplete="off" class="layui-input"  />
                 </div>
             </div>
@@ -64,7 +64,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label layui-inline" style="width: 50px">提成</label>
                 <div class="layui-input-inline" style="width: 170px;">
-                    <input type="number" value="0" name="goodspercentage" readonly placeholder="请输入提成" data-valid="name:'提成',length:[1,5]"
+                    <input type="number" value="0" name="goodspercentage" placeholder="请输入提成" data-valid="name:'提成',length:[1,5]"
                            autocomplete="off" class="layui-input"  />
                 </div>
             </div>
@@ -254,7 +254,7 @@
             , data: {basePath:'/Uploadfile/goodsimg/'}
             , url: Config.UrlHead + '/uploader/upload' //上传接口
             , done: function (res) {
-                var tr='<tr data-src="'+res.data+'"><td><button class="layui-btn layui-btn-xs layui-btn-danger"><i class="layui-icon">&#xe640;</i>移除</button></td><td><img src="'+ Config.UrlHead+res.data +'" width="300px""></td></tr>'
+                var tr='<tr data-src="'+res.data+'"><td><button class="layui-btn layui-btn-xs layui-btn-danger" onclick="$(this).parent().parent().remove()"><i class="layui-icon">&#xe640;</i>移除</button></td><td><img src="'+ Config.UrlHead+res.data +'" width="300px""></td></tr>'
                 $('#tb-goodsimg').append(tr);
             }
         });

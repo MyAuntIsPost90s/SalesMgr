@@ -21,7 +21,12 @@
         <ul id="tree-goodskind"></ul>
     </div>
     <div data-options='region:"center"'>
-        <table id="table-goods"></table>
+        <table id="table-goods" data-options="toolbar:'#tb-goods'"></table>
+        <div id="tb-goods">
+            <label class="layui-form-label layui-inline" style="width: 50px;height: 30px;line-height: 30px;padding: 0">搜索：</label>
+            <input type="text" id="inp-condition" class="layui-input layui-input-inline" style="width: 150px;height: 30px" />
+            <button onclick="search()" class="layui-btn layui-btn-sm layui-btn-primary" type="button"><i class="layui-icon">&#xe615;</i> 搜索</button>
+        </div>
     </div>
     <div data-options='region:"east"' style="width: 400px">
         <h4 style="color: #888;padding: 10px 10px;border-bottom: 1px solid #e8e8e8">订单物品</h4>
@@ -50,7 +55,16 @@
                     <tbody id="tb-ordergoods"></tbody>
                 </table>
             </div>
-            <button type="button" id="btn-goodsimg" class="layui-btn layui-btn-normal" style="float: right;margin: 5px" onclick="createOrder()"><i class="layui-icon">&#xe621;</i>创建订单</button>
+            <div class="layui-form-item" style="padding: 5px">
+                <label class="layui-form-label">备注：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="ordernote" id="inp-ordernote" required placeholder="请输入备注"
+                           data-valid="name:'备注',length:[0,100]" class="layui-input"/>
+                </div>
+            </div>
+            <button type="button" id="btn-goodsimg" class="layui-btn layui-btn-normal" style="float: right;margin: 5px"
+                    onclick="createOrder()"><i class="layui-icon">&#xe621;</i>创建订单
+            </button>
         </div>
     </div>
 </div>
@@ -58,9 +72,10 @@
     <div style="padding: 10px;">
         <form class="layui-form layui-form-pane" id="form-goodscount">
             <div class="layui-form-item">
-                <label class="layui-form-label">数量</label>
+                <label class="layui-form-label">数量：</label>
                 <div class="layui-input-block">
-                    <input type="number" name="count" value="1" min="1" id="inp-count" required placeholder="请输入数量" data-valid="name:'数量',length:[1,5]" autocomplete="off" class="layui-input">
+                    <input type="number" name="count" value="1" min="1" id="inp-count" required placeholder="请输入数量"
+                           data-valid="name:'数量',length:[1,5]" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item" style="text-align: right">
@@ -71,28 +86,41 @@
 </script>
 <script src="../../Contents/lib/layui/layui.all.js"></script>
 <script>
-    var goodskindid='-1';
+    var goodskindid = '-1';
     $(function () {
         initDataGrid();
         EasyUIUtil.initTree('#tree-goodskind', Config.UrlHead + '/goodsKind/tree');  //加载树
         $('#tree-goodskind').tree({
-            onClick:function(node){
-                goodskindid=node.id;
+            onClick: function (node) {
+                goodskindid = node.id;
                 initDataGrid();
             }
         })
     })
 
+    //搜索
+    function search(){
+        if(goodskindid==-1){
+            return;
+        }
+        var condition = $('#inp-condition').val();
+        if(condition==''){
+            $('#table-goods').datagrid('load',{goodskindid:goodskindid});
+            return;
+        }
+        $('#table-goods').datagrid('load',{goodsname:condition,goodskindid:goodskindid});
+    }
+
     //创建订单
-    function createOrder(){
-        var list=[];
-        $('#tb-ordergoods tr').each(function(){
-            var $tr=$(this);
+    function createOrder() {
+        var list = [];
+        $('#tb-ordergoods tr').each(function () {
+            var $tr = $(this);
             var goodsid = $tr.attr('data-id');
-            var ordergoodscount=parseInt($tr.find('.inp-count').val());
-            list.push({ goodsid:goodsid, ordergoodscount:ordergoodscount })
+            var ordergoodscount = parseInt($tr.find('.inp-count').val());
+            list.push({goodsid: goodsid, ordergoodscount: ordergoodscount})
         });
-        if(list.length<1){
+        if (list.length < 1) {
             layer.msg('至少需要一种商品才能创建订单');
             return;
         }
@@ -100,7 +128,7 @@
             $.ajax({
                 url: Config.UrlHead + '/orderForm/add',
                 contentType: "application/json ; charset=utf-8",
-                data: JSON.stringify(list),
+                data: JSON.stringify({ordernote: $('#inp-ordernote').val(), list: list}),
                 method: 'post',
                 dataType: 'json',
                 success: function (data) {
@@ -117,13 +145,13 @@
 
     //初始化表格数据
     function initDataGrid() {
-        EasyUIUtil.initDataGrid('#table-goods', Config.UrlHead + "/goods/list",getColumns(),{goodskindid:goodskindid});
-        var pager=$('#table-goods').datagrid('getPager');
+        EasyUIUtil.initDataGrid('#table-goods', Config.UrlHead + "/goods/list", getColumns(), {goodskindid: goodskindid});
+        var pager = $('#table-goods').datagrid('getPager');
         pager.pagination({
             showPageList: true,
             buttons: [{
                 iconCls: 'icon-add',
-                text:'加入订单',
+                text: '加入订单',
                 handler: function () {
                     showAdd();
                 }
@@ -135,63 +163,64 @@
     }
 
     //展示添加
-    var nowrows=null;
-    function showAdd(){
+    var nowrows = null;
+
+    function showAdd() {
         nowrows = $('#table-goods').datagrid('getChecked');
-        if(nowrows==null||nowrows.length<1){
+        if (nowrows == null || nowrows.length < 1) {
             layer.msg('至少需要选中一个商品')
             return;
         }
         layer.open({
-            type:1
-            ,title:'添加到订单'
-            ,content:$('#lay-ordergoodsform').html()
+            type: 1
+            , title: '添加到订单'
+            , content: $('#lay-ordergoodsform').html()
         })
     }
 
     //添加入订单
-    function addInOrder(){
-        var data=FormUtil.getFormMap('#form-goodscount');
-        if(data==null){
+    function addInOrder() {
+        var data = FormUtil.getFormMap('#form-goodscount');
+        if (data == null) {
             return;
         }
-        if(data.count<1){
+        if (data.count < 1) {
             layer.msg('数量应该大于0');
             return;
         }
-        data.count=parseInt(data.count);
-        var html='';
-        for(var i=0;i<nowrows.length;i++){
-            var $tr=$('tr[data-id='+nowrows[i].goodsid+']');
-            if($tr.length>0){
-                var maxcount=parseInt($tr.attr('data-maxcount'));
-                var count=parseInt($tr.find('.inp-count').val());
-                var allcount=data.count+count;
-                $tr.find('input').val(allcount>maxcount?maxcount:allcount);
+        data.count = parseInt(data.count);
+        var html = '';
+        for (var i = 0; i < nowrows.length; i++) {
+            var $tr = $('tr[data-id=' + nowrows[i].goodsid + ']');
+            if ($tr.length > 0) {
+                var maxcount = parseInt($tr.attr('data-maxcount'));
+                var count = parseInt($tr.find('.inp-count').val());
+                var allcount = data.count + count;
+                $tr.find('input').val(allcount > maxcount ? maxcount : allcount);
                 continue;
             }
-            var temp='<tr data-id="'+ nowrows[i].goodsid +'" data-maxcount="'+ nowrows[i].goodscount +'" >'
-                    +'<td><button class="layui-btn layui-btn-xs layui-btn-danger" onclick="$(this).parent().parent().remove()"><i class="layui-icon">&#xe640;</i>移除</button></td>'
-                    +'<td><div style="width: 100px;overflow-x: hidden" class="div-name">'+ nowrows[i].goodsname +'</div></td>'
-                    +'<td>'
-                    +'<input type="number" value="'+ (data.count>nowrows[i].goodscount?nowrows[i].goodscount:data.count) +'" class="layui-input layui-input-inline inp-count" placeholder="1" style="width: 100px;height: 30px" />'
-                    +'</td>'
-                    +'</tr>';
-            html+=temp;
+            var temp = '<tr data-id="' + nowrows[i].goodsid + '" data-maxcount="' + nowrows[i].goodscount + '" >'
+                + '<td><button class="layui-btn layui-btn-xs layui-btn-danger" onclick="$(this).parent().parent().remove()"><i class="layui-icon">&#xe640;</i>移除</button></td>'
+                + '<td><div style="width: 100px;overflow-x: hidden" class="div-name">' + nowrows[i].goodsname + '</div></td>'
+                + '<td>'
+                + '<input type="number" value="' + (data.count > nowrows[i].goodscount ? nowrows[i].goodscount : data.count) + '" class="layui-input layui-input-inline inp-count" placeholder="1" style="width: 100px;height: 30px" />'
+                + '</td>'
+                + '</tr>';
+            html += temp;
         }
         $('#tb-ordergoods').append(html);
         layer.closeAll();
     }
 
     //获取列
-    function getColumns(){
-        var columns=[[
-            {field:'ck',checkbox:true},
-            {field:'goodsname',width:100,align:'center',title:"名称"},
-            {field:'goodscount',width:50,align:'center',title:"数量"},
-            {field:'goodscost',width:50,align:'center',title:"成本"},
-            {field:'goodsprice',width:50,align:'center',title:"售价"},
-            {field:'goodspercentage',width:50,align:'center',title:"提成"}
+    function getColumns() {
+        var columns = [[
+            {field: 'ck', checkbox: true},
+            {field: 'goodsname', width: 100, align: 'center', title: "名称"},
+            {field: 'goodscount', width: 50, align: 'center', title: "数量"},
+            {field: 'goodscost', width: 50, align: 'center', title: "成本"},
+            {field: 'goodsprice', width: 50, align: 'center', title: "售价"},
+            {field: 'goodspercentage', width: 50, align: 'center', title: "提成"}
         ]];
         return columns;
     }

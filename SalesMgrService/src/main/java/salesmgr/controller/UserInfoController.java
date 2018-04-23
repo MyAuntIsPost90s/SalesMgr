@@ -80,7 +80,7 @@ public class UserInfoController {
 		RequestHolder requestHolder = RequestHolder.get(request, response);
 		try {
 			Userinfo nowUser = (Userinfo) requestHolder.getClientUser();
-			if(nowUser.getUsertype()!=UserType.ADMIN.value){
+			if (nowUser.getUsertype() != UserType.ADMIN.value) {
 				userinfo.setUserid(nowUser.getUserid());
 			}
 			EUIPageList<UserSalaryDto> list = userInfoService.list4salary(userinfo, date, page, rows);

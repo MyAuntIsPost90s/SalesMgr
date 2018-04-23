@@ -1,3 +1,9 @@
+.header{
+    position: absolute;
+    top:0;
+    height: 60px;
+    z-index: 10
+}
 .header div{
     line-height: 60px;
 }
@@ -14,6 +20,11 @@
     text-align: right;
     padding:0 10px;
 }
+.container{
+    position: absolute;
+    top:60px;
+    z-index: 10;
+}
 .layui-footer{
     text-align: center;
     height: 30px;
@@ -22,6 +33,9 @@
 .menu{
     height: 100%;
     overflow-y: auto;
+    position: absolute;
+    left: 0;
+    z-index: 11;
 }
 .headimg{
     padding-left: 15px;
@@ -46,6 +60,9 @@
     height: 100%;
     margin: 0 0px;
     border:0;
+    position: absolute;
+    left: 205px;
+    z-index: 10;
 }
 .layui-tab{
     margin:0px -2px;
@@ -55,4 +72,9 @@
 }
 .main .layui-tab-item{
     height: 100%;
+}
+.layout-footer{
+    position: absolute;
+    bottom:0;
+    z-index: 10;
 }

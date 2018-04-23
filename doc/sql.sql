@@ -52,7 +52,7 @@ CREATE TABLE `goods` (
 
 /*Data for the table `goods` */
 
-insert  into `goods`(`goodsId`,`goodsName`,`goodsCost`,`goodsPrice`,`goodsCount`,`goodsTime`,`goodsPercentage`,`goodsKindId`,`goodsImgUrl`,`goodsContents`) values ('LG54113260413514','真维斯被套',50,80,97,'2018-03-27 13:26:04',10,'LG72614183633411','','我是被套'),('LG61713251421311','雕牌洗衣粉',8,10,486,'2018-03-27 13:25:14',0.5,'LG16314185305513','','<p style=\"text-align: center;\"><b>我雕牌洗衣粉<img src=\"http://localhost:8091/WebContent/Contents/lib/layui/images/face/16.gif\" alt=\"[太开心]\"></b></p>');
+insert  into `goods`(`goodsId`,`goodsName`,`goodsCost`,`goodsPrice`,`goodsCount`,`goodsTime`,`goodsPercentage`,`goodsKindId`,`goodsImgUrl`,`goodsContents`) values ('LG54113260413514','真维斯被套',50,80,97,'2018-03-27 13:26:04',10,'LG72614183633411','','我是被套'),('LG61713251421311','雕牌洗衣粉',8,10,485,'2018-03-27 13:25:14',0.5,'LG16314185305513','','<p style=\"text-align: center;\"><b>我雕牌洗衣粉<img src=\"http://localhost:8091/WebContent/Contents/lib/layui/images/face/16.gif\" alt=\"[太开心]\"></b></p>');
 
 /*Table structure for table `goodsimg` */
 
@@ -93,12 +93,13 @@ CREATE TABLE `orderform` (
   `orderTime` datetime NOT NULL DEFAULT '2014-01-01 00:00:00' COMMENT '订单时间',
   `orderPrice` float NOT NULL DEFAULT '0' COMMENT '订单金额',
   `userId` varchar(32) NOT NULL COMMENT '售出人员编号',
+  `orderNote` varchar(100) NOT NULL DEFAULT '' COMMENT '订单备注',
   PRIMARY KEY (`orderId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `orderform` */
 
-insert  into `orderform`(`orderId`,`orderTime`,`orderPrice`,`userId`) values ('LG61914303108112','2018-03-28 14:30:31',80,'A96311013517616');
+insert  into `orderform`(`orderId`,`orderTime`,`orderPrice`,`userId`,`orderNote`) values ('LG52015042920710','2018-04-22 15:04:29',10,'A96311013517616','我是备注'),('LG61914303108112','2018-03-28 14:30:31',80,'A96311013517616','');
 
 /*Table structure for table `ordergoods` */
 
@@ -118,7 +119,7 @@ CREATE TABLE `ordergoods` (
 
 /*Data for the table `ordergoods` */
 
-insert  into `ordergoods`(`orderGoodsId`,`goodsId`,`orderGoodsName`,`orderGoodsCost`,`orderGoodsPrice`,`orderGoodsCount`,`orderGoodsPercentage`,`orderId`) values ('LG68514303108613','LG54113260413514','真维斯被套',50,80,1,10,'LG61914303108112');
+insert  into `ordergoods`(`orderGoodsId`,`goodsId`,`orderGoodsName`,`orderGoodsCost`,`orderGoodsPrice`,`orderGoodsCount`,`orderGoodsPercentage`,`orderId`) values ('LG41815042922311','LG61713251421311','雕牌洗衣粉',8,10,1,0.5,'LG52015042920710'),('LG68514303108613','LG54113260413514','真维斯被套',50,80,1,10,'LG61914303108112');
 
 /*Table structure for table `syslog` */
 
@@ -145,14 +146,17 @@ CREATE TABLE `userinfo` (
   `realName` varchar(20) NOT NULL DEFAULT '' COMMENT '真实姓名',
   `createTime` datetime NOT NULL DEFAULT '2014-01-01 00:00:00' COMMENT '创建时间',
   `wages` float NOT NULL DEFAULT '0' COMMENT '基本工资',
-  `userType` int(11) NOT NULL DEFAULT '1' COMMENT '用户类型（-1管理员 1分销员 2采购员）',
+  `userType` int(11) NOT NULL DEFAULT '1' COMMENT '用户类型（-1管理员 1分销员 2采购员 3克隆管理员）',
   `userHeadImgUrl` varchar(100) NOT NULL DEFAULT '' COMMENT '用户头像url',
+  `phone` varchar(20) NOT NULL DEFAULT '' COMMENT '手机号',
+  `address` varchar(100) NOT NULL DEFAULT '' COMMENT '地址',
+  `cardId` varchar(20) NOT NULL DEFAULT '' COMMENT '身份证号',
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `userinfo` */
 
-insert  into `userinfo`(`userId`,`userName`,`password`,`realName`,`createTime`,`wages`,`userType`,`userHeadImgUrl`) values ('A47611123321712','zhoujielun','202CB962AC59075B964B07152D234B70','周杰伦','2014-01-01 00:00:00',3000,2,''),('A76511001709613','xiaoxiao','202CB962AC59075B964B07152D234B70','小小','2014-01-01 00:00:00',3000,1,'/Uploadfile/userheads/LG81014133529310.png'),('A84511110453511','lingjunjie','202CB962AC59075B964B07152D234B70','林俊杰','2014-01-01 00:00:00',3000,2,'/Uploadfile/userheads/LG31811110141710.png'),('A96311013517616','dada','202CB962AC59075B964B07152D234B70','大大','2014-01-01 00:00:00',3000,1,'/Uploadfile/userheads/LG94411013455915.png'),('R00001','root','C4CA4238A0B923820DCC509A6F75849B','我是超管','2014-01-01 00:00:00',0,-1,'');
+insert  into `userinfo`(`userId`,`userName`,`password`,`realName`,`createTime`,`wages`,`userType`,`userHeadImgUrl`,`phone`,`address`,`cardId`) values ('A47611123321712','zhoujielun','202CB962AC59075B964B07152D234B70','周杰伦','2014-01-01 00:00:00',3000,2,'/Uploadfile/userheads/LG54415593599013.png','','',''),('A55710445799310','admin1','202CB962AC59075B964B07152D234B70','我是管理员1','2018-04-23 10:44:58',3000,3,'','12345678911','啦啦啦','1234567890123456'),('A76511001709613','xiaoxiao','202CB962AC59075B964B07152D234B70','小小','2014-01-01 00:00:00',3000,1,'/Uploadfile/userheads/LG81014133529310.png','12345678901','福建泉州','1234567890123456'),('A84511110453511','lingjunjie','202CB962AC59075B964B07152D234B70','林俊杰','2014-01-01 00:00:00',3000,2,'/Uploadfile/userheads/LG31811110141710.png','','',''),('A96311013517616','dada','202CB962AC59075B964B07152D234B70','大大','2014-01-01 00:00:00',3000,1,'/Uploadfile/userheads/LG85115591074512.png','','',''),('R00001','root','C4CA4238A0B923820DCC509A6F75849B','我是超管','2014-01-01 00:00:00',0,-1,'/Uploadfile/userheads/LG87115581921911.png','12345678901','福建福州','1234567890123456');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

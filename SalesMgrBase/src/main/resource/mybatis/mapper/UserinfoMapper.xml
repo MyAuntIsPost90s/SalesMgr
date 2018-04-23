@@ -28,6 +28,15 @@
     <if test="userheadimgurl != null" >
       and userHeadImgUrl = #{userheadimgurl}
     </if>
+    <if test="phone != null" >
+      and phone = #{phone}
+    </if>
+    <if test="address != null" >
+      and address = #{address}
+    </if>
+    <if test="cardid != null" >
+      and cardId = #{cardid}
+    </if>
   </select>
   
   <select id="getSingle" resultType="salesmgr.base.model.Userinfo" >
@@ -61,7 +70,16 @@
         userType,
       </if>
       <if test="userheadimgurl != null" >
-        userHeadImgUrl
+        userHeadImgUrl,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="cardid != null" >
+        cardId
       </if>
     </trim>
     <trim prefix="values(" suffix=")" suffixOverrides="," >
@@ -87,7 +105,16 @@
         #{usertype},
       </if>
       <if test="userheadimgurl != null" >
-        #{userheadimgurl}
+        #{userheadimgurl},
+      </if>
+      <if test="phone != null" >
+        #{phone},
+      </if>
+      <if test="address != null" >
+        #{address},
+      </if>
+      <if test="cardid != null" >
+        #{cardid}
       </if>
     </trim>
   </insert>
@@ -114,7 +141,16 @@
         userType = #{usertype},
       </if>
       <if test="userheadimgurl != null" >
-        userHeadImgUrl = #{userheadimgurl}
+        userHeadImgUrl = #{userheadimgurl},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone},
+      </if>
+      <if test="address != null" >
+        address = #{address},
+      </if>
+      <if test="cardid != null" >
+        cardId = #{cardid}
       </if>
     </set>
     where
@@ -143,7 +179,7 @@
       and password = #{password}
     </if>
     <if test="realname != null" >
-      and realName = #{realname}
+      and (realName like CONCAT('%',#{realname},'%'))
     </if>
     <if test="createtime != null" >
       and createTime = #{createtime}
@@ -156,6 +192,15 @@
     </if>
     <if test="userheadimgurl != null" >
       and userHeadImgUrl = #{userheadimgurl}
+    </if>
+    <if test="phone != null" >
+      and phone = #{phone}
+    </if>
+    <if test="address != null" >
+      and address = #{address}
+    </if>
+    <if test="cardid != null" >
+      and cardId = #{cardid}
     </if>
   </select>
   
@@ -186,11 +231,20 @@
     <if test="userheadimgurl != null" >
       and userHeadImgUrl = #{userheadimgurl}
     </if>
+    <if test="phone != null" >
+      and phone = #{phone}
+    </if>
+    <if test="address != null" >
+      and address = #{address}
+    </if>
+    <if test="cardid != null" >
+      and cardId = #{cardid}
+    </if>
   </select>
   
    <select id="getStaffWithPage" resultType="salesmgr.base.model.Userinfo" parameterType="salesmgr.base.model.Userinfo" >
     select * from userinfo
-    where (userType = 1 or userType=2)
+    where (userType = 1 or userType=2 or userType = 3)
     <if test="userid != null" >
       and userId = #{userid}
     </if>
@@ -216,6 +270,7 @@
   
   <select id="getStaffWages" resultType="java.lang.Integer">
   	SELECT SUM(wages) FROM userinfo
-	WHERE userType = 1 OR userType=2
+	WHERE userType = 1 OR userType=2 or userType = 3
   </select>
+  
 </mapper>

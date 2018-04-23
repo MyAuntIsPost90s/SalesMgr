@@ -15,8 +15,10 @@ import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import salesmgr.base.dao.OrderformMapper;
 import salesmgr.base.model.Orderform;
 import salesmgr.base.model.Ordergoods;
+import salesmgr.base.model.dto.UserOrderDto;
 import salesmgr.service.OrderFormService;
 import salesmgr.service.OrderGoodsService;
+import salesmgr.service.UserInfoService;
 import salesmgr.uimodel.EUIPageList;
 import salesmgr.util.RandomNum;
 
@@ -27,6 +29,8 @@ public class OrderFormServiceImpl implements OrderFormService {
 	private OrderformMapper orderformMapper;
 	@Resource
 	private OrderGoodsService orderGoodsService;
+	@Resource
+	private UserInfoService userInfoService;
 
 	@Override
 	public Orderform single(String orderformid) {
@@ -34,14 +38,25 @@ public class OrderFormServiceImpl implements OrderFormService {
 	}
 
 	@Override
-	public EUIPageList<Orderform> list(Orderform orderform, int page, int rows) {
+	public EUIPageList<UserOrderDto> list(Orderform orderform, int page, int rows) {
 		PageList<Orderform> pageList = orderformMapper.getListWithPage(orderform, new PageBounds(page, rows));
-		return new EUIPageList<Orderform>(pageList.getPaginator().getTotalCount(), pageList);
+		List<UserOrderDto> list = new ArrayList<UserOrderDto>();
+		for (Orderform item : pageList) {
+			UserOrderDto userOrderDto = new UserOrderDto();
+			userOrderDto.setOrderid(item.getOrderid());
+			userOrderDto.setOrdernote(item.getOrdernote());
+			userOrderDto.setOrderprice(item.getOrderprice());
+			userOrderDto.setOrdertime(item.getOrdertime());
+			userOrderDto.setUserid(item.getUserid());
+			userOrderDto.setUserinfo(userInfoService.single(item.getUserid()));
+			list.add(userOrderDto);
+		}
+		return new EUIPageList<UserOrderDto>(pageList.getPaginator().getTotalCount(), list);
 	}
 
 	@Override
 	@Transactional(rollbackFor = { Exception.class })
-	public void add(List<Ordergoods> ordergoods, String userid) throws Exception {
+	public void add(List<Ordergoods> ordergoods, String ordernote, String userid) throws Exception {
 		Orderform orderform = new Orderform();
 		orderform.setOrderid(RandomNum.getLGID());
 		// 生成订单详情
@@ -55,6 +70,7 @@ public class OrderFormServiceImpl implements OrderFormService {
 		orderform.setOrdertime(new Date());
 		orderform.setOrderprice(sum);
 		orderform.setUserid(userid);
+		orderform.setOrdernote(ordernote);
 		orderformMapper.insert(orderform);
 	}
 

@@ -7,7 +7,7 @@ public class UserInfoEnum {
 	 *
 	 */
 	public enum UserType {
-		ADMIN(-1, "管理员"), SALES(1, "分销员"), BUY(2, "采购员");
+		ADMIN(-1, "管理员"), SALES(1, "分销员"), BUY(2, "采购员"), CHARGE(3, "主管");
 		public int value;
 		public String valueZh;
 
