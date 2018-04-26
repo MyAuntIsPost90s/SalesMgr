@@ -2,9 +2,12 @@ package salesmgr.base.model;
 
 import java.util.Date;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class Orderform {
     private String orderid;
 
+	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date ordertime;
 
     private Float orderprice;
