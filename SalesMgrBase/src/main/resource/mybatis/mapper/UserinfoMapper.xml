@@ -192,7 +192,7 @@
     </if>
     <if test="realname != null" >
   	  and (userName like CONCAT('%',#{realname},'%')
-      or realName like CONCAT('%',#{realName},'%'))
+      or realName like CONCAT('%',#{realname},'%'))
     </if>
     <if test="createtime != null" >
       and createTime = #{createtime}
