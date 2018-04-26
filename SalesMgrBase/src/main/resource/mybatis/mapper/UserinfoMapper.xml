@@ -191,7 +191,7 @@
       and password = #{password}
     </if>
     <if test="realname != null" >
-  	  and (userName like CONCAT('%',#{username},'%')
+  	  and (userName like CONCAT('%',#{realname},'%')
       or realName like CONCAT('%',#{realName},'%'))
     </if>
     <if test="createtime != null" >
