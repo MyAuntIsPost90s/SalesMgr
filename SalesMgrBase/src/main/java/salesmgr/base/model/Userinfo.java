@@ -25,6 +25,8 @@ public class Userinfo {
 
     private String cardid;
 
+    private String email;
+
     public String getUserid() {
         return userid;
     }
@@ -111,5 +113,13 @@ public class Userinfo {
 
     public void setCardid(String cardid) {
         this.cardid = cardid;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

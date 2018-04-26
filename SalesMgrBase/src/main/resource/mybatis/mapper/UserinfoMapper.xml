@@ -37,6 +37,9 @@
     <if test="cardid != null" >
       and cardId = #{cardid}
     </if>
+    <if test="email != null" >
+      and email = #{email}
+    </if>
   </select>
   
   <select id="getSingle" resultType="salesmgr.base.model.Userinfo" >
@@ -79,7 +82,10 @@
         address,
       </if>
       <if test="cardid != null" >
-        cardId
+        cardId,
+      </if>
+      <if test="email != null" >
+        email
       </if>
     </trim>
     <trim prefix="values(" suffix=")" suffixOverrides="," >
@@ -114,7 +120,10 @@
         #{address},
       </if>
       <if test="cardid != null" >
-        #{cardid}
+        #{cardid},
+      </if>
+      <if test="email != null" >
+        #{email}
       </if>
     </trim>
   </insert>
@@ -150,7 +159,10 @@
         address = #{address},
       </if>
       <if test="cardid != null" >
-        cardId = #{cardid}
+        cardId = #{cardid},
+      </if>
+      <if test="email != null" >
+        email = #{email}
       </if>
     </set>
     where
@@ -179,9 +191,7 @@
       and password = #{password}
     </if>
     <if test="realname != null" >
-      and (realName like CONCAT('%',#{realname},'%')
-      or userId like CONCAT('%',#{realname},'%')
-      or userName like CONCAT('%',#{realname},'%'))
+      and realName = #{realname}
     </if>
     <if test="createtime != null" >
       and createTime = #{createtime}
@@ -203,6 +213,9 @@
     </if>
     <if test="cardid != null" >
       and cardId = #{cardid}
+    </if>
+    <if test="email != null" >
+      and email = #{email}
     </if>
   </select>
   
@@ -242,8 +255,11 @@
     <if test="cardid != null" >
       and cardId = #{cardid}
     </if>
+    <if test="email != null" >
+      and email = #{email}
+    </if>
   </select>
-  
+
    <select id="getStaffWithPage" resultType="salesmgr.base.model.Userinfo" parameterType="salesmgr.base.model.Userinfo" >
     select * from userinfo
     where (userType = 1 or userType=2 or userType = 3)
@@ -274,5 +290,6 @@
   	SELECT SUM(wages) FROM userinfo
 	WHERE userType = 1 OR userType=2 or userType = 3
   </select>
+  
   
 </mapper>

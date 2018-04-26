@@ -151,12 +151,13 @@ CREATE TABLE `userinfo` (
   `phone` varchar(20) NOT NULL DEFAULT '' COMMENT '手机号',
   `address` varchar(100) NOT NULL DEFAULT '' COMMENT '地址',
   `cardId` varchar(20) NOT NULL DEFAULT '' COMMENT '身份证号',
+  `email` varchar(30) NOT NULL DEFAULT '' COMMENT '邮箱',
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `userinfo` */
 
-insert  into `userinfo`(`userId`,`userName`,`password`,`realName`,`createTime`,`wages`,`userType`,`userHeadImgUrl`,`phone`,`address`,`cardId`) values ('A47611123321712','zhoujielun','202CB962AC59075B964B07152D234B70','周杰伦','2014-01-01 00:00:00',3000,2,'/Uploadfile/userheads/LG54415593599013.png','','',''),('A55710445799310','admin1','202CB962AC59075B964B07152D234B70','我是管理员1','2018-04-23 10:44:58',3000,3,'','12345678911','啦啦啦','1234567890123456'),('A76511001709613','xiaoxiao','202CB962AC59075B964B07152D234B70','小小','2014-01-01 00:00:00',3000,1,'/Uploadfile/userheads/LG81014133529310.png','12345678901','福建泉州','1234567890123456'),('A84511110453511','lingjunjie','202CB962AC59075B964B07152D234B70','林俊杰','2014-01-01 00:00:00',3000,2,'/Uploadfile/userheads/LG31811110141710.png','','',''),('A96311013517616','dada','202CB962AC59075B964B07152D234B70','大大','2014-01-01 00:00:00',3000,1,'/Uploadfile/userheads/LG85115591074512.png','','',''),('R00001','root','C4CA4238A0B923820DCC509A6F75849B','我是超管','2014-01-01 00:00:00',0,-1,'/Uploadfile/userheads/LG87115581921911.png','12345678901','福建福州','1234567890123456');
+insert  into `userinfo`(`userId`,`userName`,`password`,`realName`,`createTime`,`wages`,`userType`,`userHeadImgUrl`,`phone`,`address`,`cardId`,`email`) values ('A47611123321712','zhoujielun','202CB962AC59075B964B07152D234B70','周杰伦','2014-01-01 00:00:00',3000,2,'/Uploadfile/userheads/LG54415593599013.png','','','',''),('A55710445799310','admin1','202CB962AC59075B964B07152D234B70','我是管理员1','2018-04-23 10:44:58',3000,3,'','12345678911','啦啦啦','123456789012345612','11266@qq.com'),('A76511001709613','xiaoxiao','202CB962AC59075B964B07152D234B70','小小','2014-01-01 00:00:00',3000,1,'/Uploadfile/userheads/LG81014133529310.png','12345678901','福建泉州','1234567890123456',''),('A84511110453511','lingjunjie','202CB962AC59075B964B07152D234B70','林俊杰','2014-01-01 00:00:00',3000,2,'/Uploadfile/userheads/LG31811110141710.png','','','',''),('A96311013517616','dada','202CB962AC59075B964B07152D234B70','大大','2014-01-01 00:00:00',3000,1,'/Uploadfile/userheads/LG85115591074512.png','','','',''),('R00001','root','C4CA4238A0B923820DCC509A6F75849B','我是超管','2014-01-01 00:00:00',0,-1,'/Uploadfile/userheads/LG87115581921911.png','12345678901','福建福州','123456789012345612','13@qq.com');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
