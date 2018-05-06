@@ -39,6 +39,13 @@ public interface GoodsService {
 	 * @param userinfo
 	 */
 	void update(Goods goods,String urls);
+	
+	/**
+	 * 仅修改数量
+	 * 
+	 * @param goods
+	 */
+	void update4count(Goods goods);
 
 	/**
 	 * 批量删除

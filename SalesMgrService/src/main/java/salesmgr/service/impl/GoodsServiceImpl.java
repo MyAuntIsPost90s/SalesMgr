@@ -78,6 +78,16 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
+	public void update4count(Goods goods) {
+		if (goods.getGoodscount() < 1) {
+			return;
+		}
+		Goods oldGoods = goodsMapper.getSingle(goods.getGoodsid());
+		oldGoods.setGoodscount(oldGoods.getGoodscount() + goods.getGoodscount());
+		goodsMapper.update(oldGoods);
+	}
+
+	@Override
 	@Transactional(rollbackFor = { Exception.class })
 	public void batchDelete(List<String> ids) {
 		for (String id : ids) {

@@ -79,6 +79,25 @@ public class GoodsController {
 			requestHolder.err("操作失败", e);
 		}
 	}
+	
+	/**
+	 * 修改数量（入库）
+	 * 
+	 * @param request
+	 * @param response
+	 * @param userinfo
+	 */
+	@ResponseBody
+	@RequestMapping("/update4count")
+	public void update4count(HttpServletRequest request, HttpServletResponse response, Goods goods, String urls) {
+		RequestHolder requestHolder = RequestHolder.get(request, response);
+		try {
+			goodsService.update4count(goods);
+			requestHolder.success("操作成功", goods);
+		} catch (Exception e) {
+			requestHolder.err("操作失败", e);
+		}
+	}
 
 	/**
 	 * 添加
