@@ -19,6 +19,9 @@
     <if test="ordernote != null" >
       and orderNote = #{ordernote}
     </if>
+    <if test="ordertype != null" >
+      and orderType = #{ordertype}
+    </if>
   </select>
   
   <select id="getSingle" resultType="salesmgr.base.model.Orderform" >
@@ -43,7 +46,10 @@
         userId,
       </if>
       <if test="ordernote != null" >
-        orderNote
+        orderNote,
+      </if>
+      <if test="ordertype != null" >
+        orderType
       </if>
     </trim>
     <trim prefix="values(" suffix=")" suffixOverrides="," >
@@ -60,7 +66,10 @@
         #{userid},
       </if>
       <if test="ordernote != null" >
-        #{ordernote}
+        #{ordernote},
+      </if>
+      <if test="ordertype != null" >
+        #{ordertype}
       </if>
     </trim>
   </insert>
@@ -78,7 +87,10 @@
         userId = #{userid},
       </if>
       <if test="ordernote != null" >
-        orderNote = #{ordernote}
+        orderNote = #{ordernote},
+      </if>
+      <if test="ordertype != null" >
+        orderType = #{ordertype}
       </if>
     </set>
     where
@@ -112,7 +124,9 @@
     <if test="ordernote != null" >
       and orderNote = #{ordernote}
     </if>
-    order by orderTime desc
+    <if test="ordertype != null" >
+      and orderType = #{ordertype}
+    </if>
   </select>
   
   <select id="count" resultType="java.lang.Long" parameterType="salesmgr.base.model.Orderform" >
@@ -132,6 +146,9 @@
     </if>
     <if test="ordernote != null" >
       and orderNote = #{ordernote}
+    </if>
+    <if test="ordertype != null" >
+      and orderType = #{ordertype}
     </if>
   </select>
   

@@ -12,6 +12,7 @@ import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 
 import salesmgr.base.dao.UserinfoMapper;
+import salesmgr.base.enums.UserInfoEnum.UserType;
 import salesmgr.base.model.Ordergoods;
 import salesmgr.base.model.Userinfo;
 import salesmgr.base.model.dto.UserSalaryDto;
@@ -73,9 +74,15 @@ public class UserInfoServiceImpl implements UserInfoService {
 				ordergoods.setOrdergoodsprice(0f);
 			}
 			userSalaryDto.setAllcost(ordergoods.getOrdergoodscost());
-			userSalaryDto.setAllcount(ordergoods.getOrdergoodscount());
-			userSalaryDto.setAllpercentage(ordergoods.getOrdergoodspercentage());
-			userSalaryDto.setAllprice(ordergoods.getOrdergoodsprice());
+			if (item.getUsertype().equals(UserType.SALES.value)) {
+				userSalaryDto.setAllcount(ordergoods.getOrdergoodscount());
+				userSalaryDto.setAllpercentage(ordergoods.getOrdergoodspercentage());
+				userSalaryDto.setAllprice(ordergoods.getOrdergoodsprice());
+			}else{
+				userSalaryDto.setAllpercentage(0);
+				userSalaryDto.setAllcount(0);
+				userSalaryDto.setAllprice(0);
+			}
 			list.add(userSalaryDto);
 		}
 		return new EUIPageList<UserSalaryDto>(pageList.getPaginator().getTotalCount(), list);

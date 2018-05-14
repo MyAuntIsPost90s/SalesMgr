@@ -36,6 +36,19 @@
                 </div>
             </div>
             <div class="layui-form-item">
+                <label class="layui-form-label">性别</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="addresslistsex" value="0" title="女" />
+                    <input type="radio" name="addresslistsex" value="1" title="男" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">生日</label>
+                <div class="layui-input-block">
+                    <input type="text" id="date-birthday" name="addresslistbirthday" required  readonly placeholder="例:2000-01-01" value="2000-01-01" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
                 <label class="layui-form-label">联系方式</label>
                 <div class="layui-input-block">
                     <input type="text" name="addresslistphone" required placeholder="请输入联系方式" data-valid="name:'联系方式',length:[1,20]" autocomplete="off" class="layui-input">
@@ -142,7 +155,7 @@
             ,content:$('#lay-addresslistform').html()
             ,success:function(){
                 FormUtil.loadForm('#form-addresslist',{type:'add'});
-                layui.form.render();
+                initForm();
             }
         })
     }
@@ -165,7 +178,7 @@
                         }else {
                             layer.msg(data.msg);
                         }
-                        layui.form.render();
+                        initForm();
                     }
                 })
             },'json');
@@ -214,9 +227,27 @@
                 }
             },
             {field:'addresslistname',width:100,align:'center',title:"姓名"},
-            {field:'addresslistphone',width:100,align:'center',title:"联系方式"}
+            {field:'addresslistphone',width:100,align:'center',title:"联系方式"},
+            {field:'addresslistbirthday',width:100,align:'center',title:"生日"},
+            {
+                field:'addresslistsex'
+                ,width:100
+                ,align:'center'
+                ,title:"性别"
+                ,formatter:function(val,row) {
+                    return val==1?'男':'女';
+                }
+            }
         ]];
         return columns;
+    }
+
+    //初始化表单
+    function initForm(){
+        layui.form.render();
+        layui.laydate.render({
+            elem: '#date-birthday'
+        });
     }
 </script>
 </body>

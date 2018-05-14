@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import lingshi.web.model.RequestHolder;
 import salesmgr.base.model.Goods;
+import salesmgr.base.model.Userinfo;
 import salesmgr.base.model.dto.GoodsDto;
 import salesmgr.service.GoodsService;
 import salesmgr.uimodel.EUIPageList;
@@ -79,7 +80,7 @@ public class GoodsController {
 			requestHolder.err("操作失败", e);
 		}
 	}
-	
+
 	/**
 	 * 修改数量（入库）
 	 * 
@@ -92,7 +93,8 @@ public class GoodsController {
 	public void update4count(HttpServletRequest request, HttpServletResponse response, Goods goods, String urls) {
 		RequestHolder requestHolder = RequestHolder.get(request, response);
 		try {
-			goodsService.update4count(goods);
+			Userinfo userinfo = (Userinfo) requestHolder.getClientUser();
+			goodsService.update4count(goods, userinfo.getUserid());
 			requestHolder.success("操作成功", goods);
 		} catch (Exception e) {
 			requestHolder.err("操作失败", e);

@@ -42,6 +42,8 @@ public class AddressListServiceImpl implements AddressListService {
 			map.put("编号", addresslist.getAddresslistid());
 			map.put("姓名", addresslist.getAddresslistname());
 			map.put("联系方式", addresslist.getAddresslistphone());
+			map.put("性别", addresslist.getAddresslistsex() == 1 ? "男" : "女");
+			map.put("生日", new SimpleDateFormat("yyyy-MM-dd").format(addresslist.getAddresslistbirthday()));
 			map.put("创建时间", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(addresslist.getAddresslisttime()));
 			result.add(map);
 		}
@@ -50,7 +52,7 @@ public class AddressListServiceImpl implements AddressListService {
 
 	@Override
 	public String[] excelcols() {
-		return new String[] { "序号", "编号", "姓名", "联系方式", "创建时间" };
+		return new String[] { "序号", "编号", "姓名", "联系方式", "性别", "生日", "创建时间" };
 	}
 
 	@Override

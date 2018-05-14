@@ -16,6 +16,7 @@ import salesmgr.base.enums.UserInfoEnum.UserType;
 import salesmgr.base.model.Orderform;
 import salesmgr.base.model.Userinfo;
 import salesmgr.base.model.dto.UserOrderDto;
+import salesmgr.common.OrderEnums.OrderType;
 import salesmgr.model.dto.AddOrderDto;
 import salesmgr.service.OrderFormService;
 import salesmgr.uimodel.EUIPageList;
@@ -54,19 +55,21 @@ public class OrderFormController {
 	}
 
 	/**
-	 * 添加订单
+	 * 添加销售订单
 	 * 
 	 * @param request
 	 * @param response
 	 * @param ordergoods
 	 */
 	@ResponseBody
-	@RequestMapping("/add")
-	public void add(HttpServletRequest request, HttpServletResponse response, @RequestBody AddOrderDto addOrderDto) {
+	@RequestMapping("/addSales")
+	public void addSales(HttpServletRequest request, HttpServletResponse response,
+			@RequestBody AddOrderDto addOrderDto) {
 		RequestHolder requestHolder = RequestHolder.get(request, response);
 		try {
 			Userinfo userinfo = (Userinfo) requestHolder.getClientUser();
-			orderFormService.add(addOrderDto.getList(), addOrderDto.getOrdernote(), userinfo.getUserid());
+			orderFormService.add(addOrderDto.getList(), OrderType.SALES.value, addOrderDto.getOrdernote(),
+					userinfo.getUserid());
 			requestHolder.success("操作成功，请在订单记录中查看");
 		} catch (Exception e) {
 			requestHolder.err("操作失败", e);

@@ -32,7 +32,7 @@ public interface OrderFormService {
 	 * @param userinfo
 	 * @param stringBuilder
 	 */
-	void add(List<Ordergoods> ordergoods, String ordernote, String userid) throws Exception;
+	void add(List<Ordergoods> ordergoods, int ordertype, String ordernote, String userid) throws Exception;
 
 	/**
 	 * 修改

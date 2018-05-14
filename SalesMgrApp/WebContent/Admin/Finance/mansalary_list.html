@@ -21,6 +21,13 @@
     <div id="tb-userinfo">
         <label class="layui-form-label layui-inline" style="width: 50px;height: 30px;line-height: 30px;padding: 0">月份：</label>
         <input type="text" id="date-condition" class="layui-input layui-input-inline" placeholder="默认：全部" readonly style="width: 150px;height: 30px" />
+        <label class="layui-form-label layui-inline" style="width: 50px;height: 30px;line-height: 30px;padding: 0">类型：</label>
+        <select id="sct-usertype" class="layui-select layui-input-inline" readonly style="width: 150px;height: 30px" >
+            <option value="-1">全部</option>
+            <option value="1">销售</option>
+            <option value="2">采购</option>
+            <option value="3">主管</option>
+        </select>
         <button onclick="search()" class="layui-btn layui-btn-sm layui-btn-primary" type="button"><i class="layui-icon">&#xe615;</i> 查看</button>
     </div>
 </div>
@@ -38,16 +45,20 @@
     //搜索
     function search(){
         var condition = $('#date-condition').val();
-        if(condition==''){
-            $('#table-userinfo').datagrid('load',{});
-            return;
+        var postData={};
+        if(condition!=''){
+            postData.date=condition;
         }
-        $('#table-userinfo').datagrid('load',{date:condition});
+        var usertype=$('#sct-usertype').val();
+        if(usertype!='-1'){
+            postData.usertype=usertype;
+        }
+        $('#table-userinfo').datagrid('load',postData);
     }
 
     //初始化表格数据
     function initDataGrid() {
-        EasyUIUtil.initDataGrid('#table-userinfo', Config.UrlHead + "/userInfo/list4salary",getColumns(),{usertype:2,date:$('#date-condition').val()});
+        EasyUIUtil.initDataGrid('#table-userinfo', Config.UrlHead + "/userInfo/list4salary",getColumns(),{date:$('#date-condition').val()});
         var pager=$('#table-userinfo').datagrid('getPager');
         pager.pagination({
             showPageList: true,
@@ -83,7 +94,7 @@
                 title:"职位",
                 formatter:function(val,row){
                     switch (val){
-                        case 1:return '分销';
+                        case 1:return '业务';
                         case 2:return '采购';
                         case 3:return '主管';
                         default: return '未定义'

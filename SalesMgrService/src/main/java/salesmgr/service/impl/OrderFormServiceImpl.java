@@ -16,6 +16,7 @@ import salesmgr.base.dao.OrderformMapper;
 import salesmgr.base.model.Orderform;
 import salesmgr.base.model.Ordergoods;
 import salesmgr.base.model.dto.UserOrderDto;
+import salesmgr.common.OrderEnums.OrderType;
 import salesmgr.service.OrderFormService;
 import salesmgr.service.OrderGoodsService;
 import salesmgr.service.UserInfoService;
@@ -56,21 +57,28 @@ public class OrderFormServiceImpl implements OrderFormService {
 
 	@Override
 	@Transactional(rollbackFor = { Exception.class })
-	public void add(List<Ordergoods> ordergoods, String ordernote, String userid) throws Exception {
+	public void add(List<Ordergoods> ordergoods, int ordertype, String ordernote, String userid) throws Exception {
 		Orderform orderform = new Orderform();
 		orderform.setOrderid(RandomNum.getLGID());
 		// 生成订单详情
 		float sum = 0f;
 		for (Ordergoods item : ordergoods) {
 			item.setOrderid(orderform.getOrderid());
-			orderGoodsService.add(item);
-			sum += item.getOrdergoodscount() * item.getOrdergoodsprice();
+			orderGoodsService.add(item, ordertype);
+			if (ordertype == OrderType.SALES.value) {
+				sum += item.getOrdergoodscount() * item.getOrdergoodsprice();
+			}
+			if (ordertype == OrderType.BUY.value) {
+				sum += item.getOrdergoodscount() * item.getOrdergoodscost();
+			}
+
 		}
 		// 生成订单
 		orderform.setOrdertime(new Date());
 		orderform.setOrderprice(sum);
 		orderform.setUserid(userid);
 		orderform.setOrdernote(ordernote);
+		orderform.setOrdertype(ordertype);
 		orderformMapper.insert(orderform);
 	}
 

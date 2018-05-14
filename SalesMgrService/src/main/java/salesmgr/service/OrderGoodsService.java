@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import salesmgr.base.model.Ordergoods;
-import salesmgr.common.OrderEnums.OrderFormType;
+import salesmgr.common.OrderEnums.SearchOrderFormType;
 import salesmgr.uimodel.EUIPageList;
 
 public interface OrderGoodsService {
@@ -24,7 +24,7 @@ public interface OrderGoodsService {
 	 * 
 	 * @return
 	 */
-	Map<String, String> getOrderForm(Date date, OrderFormType orderFormType);
+	Map<String, String> getOrderForm(Date date, SearchOrderFormType orderFormType);
 
 	/**
 	 * 获取单条数据
@@ -50,7 +50,7 @@ public interface OrderGoodsService {
 	 * @param userinfo
 	 * @param stringBuilder
 	 */
-	void add(Ordergoods ordergoods) throws Exception;
+	void add(Ordergoods ordergoods, int ordertype) throws Exception;
 
 	/**
 	 * 修改

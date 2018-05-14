@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import lingshi.web.model.RequestHolder;
 import salesmgr.base.model.Ordergoods;
-import salesmgr.common.OrderEnums.OrderFormType;
+import salesmgr.common.OrderEnums.SearchOrderFormType;
 import salesmgr.service.OrderGoodsService;
 import salesmgr.uimodel.EUIPageList;
 
@@ -39,7 +39,7 @@ public class OrderGoodsController {
 			@DateTimeFormat(pattern = "yyyy-MM-dd") Date date, String type) {
 		RequestHolder requestHolder = RequestHolder.get(request, response);
 		try {
-			Map<String, String> map = orderGoodsService.getOrderForm(date, OrderFormType.valueOf(type));
+			Map<String, String> map = orderGoodsService.getOrderForm(date, SearchOrderFormType.valueOf(type));
 			if (map == null) {
 				requestHolder.fail("当前无数据");
 			}

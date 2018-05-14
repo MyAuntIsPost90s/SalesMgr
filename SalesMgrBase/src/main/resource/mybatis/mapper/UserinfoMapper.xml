@@ -263,7 +263,13 @@
 
    <select id="getStaffWithPage" resultType="salesmgr.base.model.Userinfo" parameterType="salesmgr.base.model.Userinfo" >
     select * from userinfo
-    where (userType = 1 or userType=2 or userType = 3)
+    where 1=1
+    <if test="usertype == null ">
+    	and (userType = 1 or userType=2 or userType = 3)
+    </if>
+    <if test="usertype != null ">
+    	and userType = #{usertype}
+    </if>
     <if test="userid != null" >
       and userId = #{userid}
     </if>

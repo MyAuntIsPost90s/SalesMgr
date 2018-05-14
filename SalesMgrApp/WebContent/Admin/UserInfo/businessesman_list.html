@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>管理员列表</title>
+    <title>商户列表</title>
     <link rel="stylesheet" href="../../Contents/lib/layui/css/layui.css">
     <link rel="stylesheet" href="../../Contents/lib/easyui-theme/themes/insdep/easyui.css">
     <link rel="stylesheet" href="../../Contents/lib/easyui-theme/themes/insdep/icon.css">
@@ -29,7 +29,7 @@
         <form class="layui-form layui-form-pane" id="form-userinfo">
             <input id="opt-type" type="hidden" name="type" />
             <input type="hidden" name="userid" />
-            <input type="hidden" name="usertype" value="3" />
+            <input type="hidden" name="usertype" value="4" />
             <div class="layui-form-item">
                 <img id="img-userheadimgurl" data-src="" src="../../Contents/images/dfthead.png" height="115" width="115" />
             </div>
@@ -46,9 +46,9 @@
                     </div>
                 </div>
                 <div class="layui-inline">
-                    <label class="layui-form-label">真实姓名</label>
+                    <label class="layui-form-label">商户名称</label>
                     <div class="layui-input-block">
-                        <input type="text" name="realname" required  lay-verify="realname" placeholder="请输入真实姓名" data-valid="name:'真实姓名',length:[1,20]" autocomplete="off" class="layui-input">
+                        <input type="text" name="realname" required  lay-verify="realname" placeholder="请输入商户名称" data-valid="name:'真实姓名',length:[1,20]" autocomplete="off" class="layui-input">
                     </div>
                 </div>
             </div>
@@ -60,9 +60,9 @@
                     </div>
                 </div>
                 <div class="layui-inline">
-                    <label class="layui-form-label">住址</label>
+                    <label class="layui-form-label">地址</label>
                     <div class="layui-input-block">
-                        <input type="text" name="address" required placeholder="请输入住址" data-valid="name:'住址',length:[1,100]" autocomplete="off" class="layui-input">
+                        <input type="text" name="address" required placeholder="请输入地址" data-valid="name:'地址',length:[1,100]" autocomplete="off" class="layui-input">
                     </div>
                 </div>
             </div>
@@ -74,16 +74,10 @@
                     </div>
                 </div>
                 <div class="layui-inline">
-                    <label class="layui-form-label">基本工资</label>
+                    <label class="layui-form-label">机构代码</label>
                     <div class="layui-input-block">
-                        <input type="number" name="wages" required  lay-verify="realname" placeholder="请输入基本工资" value="3000" data-valid="name:'基本工资',length:[1,5]" autocomplete="off" class="layui-input">
+                        <input type="text" name="cardid" required placeholder="请输入机构代码" data-valid="name:'机构代码',length:[1,20]" autocomplete="off" class="layui-input">
                     </div>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">身份证号</label>
-                <div class="layui-input-block">
-                    <input type="text" name="cardid" required placeholder="请输入身份证号" data-valid="name:'身份证号',length:[18,18]" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item" style="text-align: right">
@@ -102,10 +96,10 @@
     function search(){
         var condition = $('#inp-condition').val();
         if(condition==''){
-            $('#table-userinfo').datagrid('load',{usertype:3});
+            $('#table-userinfo').datagrid('load',{usertype:4});
             return;
         }
-        $('#table-userinfo').datagrid('load',{realname:condition,usertype:3});
+        $('#table-userinfo').datagrid('load',{realname:condition,usertype:4});
     }
 
     //保存
@@ -187,7 +181,7 @@
     function showAddUserinfo() {
         layer.open({
             type:1
-            ,title:'添加用户'
+            ,title:'添加商户'
             ,area:['640px','530px']
             ,content:$('#lay-userinfoform').html()
             ,success:function(){
@@ -209,7 +203,7 @@
                 layer.close(index);
                 layer.open({
                     type:1
-                    ,title:'修改用户'
+                    ,title:'修改商户'
                     ,area:['640px','530px']
                     ,content:$('#lay-userinfoform').html()
                     ,success:function(){
@@ -248,7 +242,7 @@
 
     //初始化表格数据
     function initDataGrid() {
-        EasyUIUtil.initDataGrid('#table-userinfo', Config.UrlHead + "/userInfo/list",getColumns(),{usertype:3});
+        EasyUIUtil.initDataGrid('#table-userinfo', Config.UrlHead + "/userInfo/list",getColumns(),{usertype:4});
         var pager=$('#table-userinfo').datagrid('getPager');
         pager.pagination({
             showPageList: true,
@@ -284,10 +278,9 @@
                 }
             },
             {field:'username',width:100,align:'center',title:"用户名"},
-            {field:'realname',width:100,align:'center',title:"姓名"},
-            {field:'address',width:100,align:'center',title:"住址"},
-            {field:'phone',width:100,align:'center',title:"手机号"},
-            {field:'wages',width:100,align:'center',title:"基本工资"}
+            {field:'realname',width:100,align:'center',title:"商户名称"},
+            {field:'address',width:100,align:'center',title:"地址"},
+            {field:'phone',width:100,align:'center',title:"手机号"}
         ]];
         return columns;
     }

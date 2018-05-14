@@ -99,7 +99,7 @@
             {field:'ck',checkbox:true},
             {
                 field:'userid',
-                width:150,
+                width:50,
                 title:'操作',
                 align:'center',
                 formatter:function(val,row){
@@ -109,26 +109,8 @@
             },
             {field:'orderid',width:100,align:'center',title:"订单编号"},
             {field:'orderprice',width:100,align:'center',title:"订单总额"},
-            {field:'ordertime',width:100,align:'center',title:"创建时间"},
-            {
-                field:'ordertype',
-                width:100,
-                title:'订单类型',
-                align:'center',
-                formatter:function(val,row){
-                    return val==0?'采购':'销售';
-                }
-            },
-            {
-                field:'userinfo',
-                width:100,
-                title:'用户',
-                align:'center',
-                formatter:function(val,row){
-                    return val.realname;
-                }
-            },
-            {field:'ordernote',width:100,align:'center',title:'备注'}
+            {field:'ordernote',width:100,align:'center',title:'备注'},
+            {field:'ordertime',width:100,align:'center',title:"创建时间"}
         ]];
         return columns;
     }

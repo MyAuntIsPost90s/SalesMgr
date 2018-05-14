@@ -103,6 +103,8 @@
                 }
                 if(data.code!=1){
                     layer.msg(data.msg);
+                }else {
+                    layer.msg('该账号无权限登陆');
                 }
             },'json')
     });

@@ -16,6 +16,12 @@
     <if test="addresslisttime != null" >
       and addressListTime = #{addresslisttime}
     </if>
+    <if test="addresslistsex != null" >
+      and addressListSex = #{addresslistsex}
+    </if>
+    <if test="addresslistbirthday != null" >
+      and addressListBirthDay = #{addresslistbirthday}
+    </if>
   </select>
   
   <select id="getSingle" resultType="salesmgr.base.model.Addresslist" >
@@ -37,7 +43,13 @@
         addressListPhone,
       </if>
       <if test="addresslisttime != null" >
-        addressListTime
+        addressListTime,
+      </if>
+      <if test="addresslistsex != null" >
+        addressListSex,
+      </if>
+      <if test="addresslistbirthday != null" >
+        addressListBirthDay
       </if>
     </trim>
     <trim prefix="values(" suffix=")" suffixOverrides="," >
@@ -51,7 +63,13 @@
         #{addresslistphone},
       </if>
       <if test="addresslisttime != null" >
-        #{addresslisttime}
+        #{addresslisttime},
+      </if>
+      <if test="addresslistsex != null" >
+        #{addresslistsex},
+      </if>
+      <if test="addresslistbirthday != null" >
+        #{addresslistbirthday}
       </if>
     </trim>
   </insert>
@@ -66,7 +84,13 @@
         addressListPhone = #{addresslistphone},
       </if>
       <if test="addresslisttime != null" >
-        addressListTime = #{addresslisttime}
+        addressListTime = #{addresslisttime},
+      </if>
+      <if test="addresslistsex != null" >
+        addressListSex = #{addresslistsex},
+      </if>
+      <if test="addresslistbirthday != null" >
+        addressListBirthDay = #{addresslistbirthday}
       </if>
     </set>
     where
@@ -89,14 +113,19 @@
       and addressListId = #{addresslistid}
     </if>
     <if test="addresslistname != null" >
-      and (addressListName like CONCAT('%',#{addresslistname},'%')
-      or addressListPhone like CONCAT('%',#{addresslistname},'%'))
+      and addressListName = #{addresslistname}
     </if>
     <if test="addresslistphone != null" >
       and addressListPhone = #{addresslistphone}
     </if>
     <if test="addresslisttime != null" >
       and addressListTime = #{addresslisttime}
+    </if>
+    <if test="addresslistsex != null" >
+      and addressListSex = #{addresslistsex}
+    </if>
+    <if test="addresslistbirthday != null" >
+      and addressListBirthDay = #{addresslistbirthday}
     </if>
   </select>
   
@@ -114,6 +143,12 @@
     </if>
     <if test="addresslisttime != null" >
       and addressListTime = #{addresslisttime}
+    </if>
+    <if test="addresslistsex != null" >
+      and addressListSex = #{addresslistsex}
+    </if>
+    <if test="addresslistbirthday != null" >
+      and addressListBirthDay = #{addresslistbirthday}
     </if>
   </select>
   

@@ -126,7 +126,7 @@
         }
         layer.confirm("是否确定创建订单?", function (index) {
             $.ajax({
-                url: Config.UrlHead + '/orderForm/add',
+                url: Config.UrlHead + '/orderForm/addSales',
                 contentType: "application/json ; charset=utf-8",
                 data: JSON.stringify({ordernote: $('#inp-ordernote').val(), list: list}),
                 method: 'post',

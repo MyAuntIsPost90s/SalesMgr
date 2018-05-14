@@ -48,6 +48,9 @@ sourceSets {
 dependencies {
 	//webbase
 	compile 'jstl:jstl:1.2'
+	
+	//springMVC
+	compile 'org.springframework:spring-web:4.3.8.RELEASE'
     
     //mybaties and mysql
     compile 'mysql:mysql-connector-java:5.1.38'

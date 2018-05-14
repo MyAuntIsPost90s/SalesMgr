@@ -193,12 +193,15 @@
 		SUM(orderGoodsPrice * orderGoodsCount) orderGoodsPrice
 		, SUM(orderGoodsCount) orderGoodsCount
 		, SUM(orderGoodsCost * orderGoodsCount) orderGoodsCost
-		, SUM(orderGoodsPercentage * orderGoodsCount) orderGoodsPercentage 
+		, SUM(orderGoodsPercentage * orderGoodsCount) orderGoodsPercentage
 	FROM ordergoods og
 	LEFT JOIN orderform o ON og.orderid=o.orderid
 	WHERE 1=1
 	<if test="userid != null" >
 	and o.userid=#{userid}
+	</if>
+	<if test="ordertype != null" >
+	and o.ordertype=#{ordertype}
 	</if>
 	<if test="type == 'd'.toString() and ordertime != null">
 		and DATE_FORMAT(ordertime, '%Y-%m-%d')=DATE_FORMAT(#{ordertime},'%Y-%m-%d')

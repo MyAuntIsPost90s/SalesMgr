@@ -18,5 +18,5 @@ public interface OrdergoodsMapper extends BaseMapper<Ordergoods> {
 	 * @return
 	 */
 	Ordergoods getItemSum(@Param("userid") String userid, @Param("ordertime") Date ordertime,
-			@Param("type") String type);
+			@Param("ordertype") Integer ordertype, @Param("type") String type);
 }

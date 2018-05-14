@@ -31,21 +31,21 @@ public interface GoodsService {
 	 * @param userinfo
 	 * @param stringBuilder
 	 */
-	void add(Goods goods,String urls);
+	void add(Goods goods, String urls);
 
 	/**
 	 * 修改
 	 * 
 	 * @param userinfo
 	 */
-	void update(Goods goods,String urls);
-	
+	void update(Goods goods, String urls);
+
 	/**
 	 * 仅修改数量
 	 * 
 	 * @param goods
 	 */
-	void update4count(Goods goods);
+	void update4count(Goods goods, String userid) throws Exception;
 
 	/**
 	 * 批量删除

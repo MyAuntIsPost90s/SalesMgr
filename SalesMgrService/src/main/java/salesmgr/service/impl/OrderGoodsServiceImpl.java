@@ -17,7 +17,8 @@ import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import salesmgr.base.dao.OrdergoodsMapper;
 import salesmgr.base.model.Goods;
 import salesmgr.base.model.Ordergoods;
-import salesmgr.common.OrderEnums.OrderFormType;
+import salesmgr.common.OrderEnums.OrderType;
+import salesmgr.common.OrderEnums.SearchOrderFormType;
 import salesmgr.service.GoodsService;
 import salesmgr.service.OrderGoodsService;
 import salesmgr.service.UserInfoService;
@@ -36,12 +37,13 @@ public class OrderGoodsServiceImpl implements OrderGoodsService {
 
 	@Override
 	public Ordergoods getItemSum(String userid, Date date) {
-		return ordergoodsMapper.getItemSum(userid, date, OrderFormType.MONTH.value);
+		return ordergoodsMapper.getItemSum(userid, date, null, SearchOrderFormType.MONTH.value);
 	}
 
 	@Override
-	public Map<String, String> getOrderForm(Date date, OrderFormType orderFormType) {
-		Ordergoods ordergoods = ordergoodsMapper.getItemSum(null, date, orderFormType.value);
+	public Map<String, String> getOrderForm(Date date, SearchOrderFormType searchOrderFormType) {
+		Ordergoods ordergoods = ordergoodsMapper.getItemSum(null, date, OrderType.SALES.value,
+				searchOrderFormType.value);
 		if (ordergoods == null) {
 			return null;
 		}
@@ -51,10 +53,10 @@ public class OrderGoodsServiceImpl implements OrderGoodsService {
 		map.put("allcost", df.format(ordergoods.getOrdergoodscost()));
 		map.put("allprice", df.format(ordergoods.getOrdergoodsprice()));
 		map.put("allpercentage", df.format(ordergoods.getOrdergoodspercentage()));
-		if (orderFormType.value == OrderFormType.DAY.value) {
+		if (searchOrderFormType.value == SearchOrderFormType.DAY.value) {
 			stuffWages = 0;
 		}
-		if (orderFormType.value == OrderFormType.YEAR.value) {
+		if (searchOrderFormType.value == SearchOrderFormType.YEAR.value) {
 			stuffWages *= 12;
 		}
 		map.put("stuffwages", df.format(stuffWages));
@@ -81,7 +83,7 @@ public class OrderGoodsServiceImpl implements OrderGoodsService {
 
 	@Override
 	@Transactional(rollbackFor = { Exception.class })
-	public void add(Ordergoods ordergoods) throws Exception {
+	public void add(Ordergoods ordergoods, int ordertype) throws Exception {
 		Goods goods = goodsService.single(ordergoods.getGoodsid());
 		ordergoods.setOrdergoodsid(RandomNum.getLGID());
 		ordergoods.setOrdergoodscost(goods.getGoodscost());
@@ -89,14 +91,16 @@ public class OrderGoodsServiceImpl implements OrderGoodsService {
 		ordergoods.setOrdergoodsprice(goods.getGoodsprice());
 		ordergoods.setOrdergoodspercentage(goods.getGoodspercentage());
 		ordergoodsMapper.insert(ordergoods);
-		
-		//修改goods数量
-		int count = goods.getGoodscount()-ordergoods.getOrdergoodscount();
-		if(count<0){
-			throw new Exception(goods.getGoodsname()+"超过库存，创建失败");
+
+		if (ordertype == OrderType.SALES.value) {
+			// 修改goods数量
+			int count = goods.getGoodscount() - ordergoods.getOrdergoodscount();
+			if (count < 0) {
+				throw new Exception(goods.getGoodsname() + "超过库存，创建失败");
+			}
+			goods.setGoodscount(count);
+			goodsService.update(goods, null);
 		}
-		goods.setGoodscount(count);
-		goodsService.update(goods, null);
 	}
 
 	@Override
