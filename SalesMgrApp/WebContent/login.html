@@ -89,9 +89,11 @@
                 layer.closeAll();
                 if(data.code==1&&data.data.usertype==-1){   //管理员
                     loginSuccess('Admin/index.html');
+                	return;
                 }
                 if(data.code==1&&data.data.usertype==3){   //主管
                     loginSuccess('Charge/index.html');
+                	return;
                 }
                 if(data.code==1&&data.data.usertype==1){    //分销员
                     loginSuccess('Salesman/index.html');
