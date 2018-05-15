@@ -127,6 +127,7 @@
     <if test="ordertype != null" >
       and orderType = #{ordertype}
     </if>
+    order by orderTime desc
   </select>
   
   <select id="count" resultType="java.lang.Long" parameterType="salesmgr.base.model.Orderform" >
