@@ -30,12 +30,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="me.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="me.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Businessman/UserInfo/me.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1308">
               <caret line="77" column="64" lean-forward="true" selection-start-line="77" selection-start-column="64" selection-end-line="77" selection-end-column="64" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Businessman/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-504">
+              <caret line="29" column="43" lean-forward="false" selection-start-line="29" selection-start-column="43" selection-end-line="29" selection-end-column="43" />
+              <folding>
+                <marker date="1527499679526" expanded="true" signature="3074:3110" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -113,11 +125,11 @@
         <option value="$PROJECT_DIR$/Admin/index.html" />
         <option value="$PROJECT_DIR$/Buyer/Goods/edit.html" />
         <option value="$PROJECT_DIR$/login.html" />
-        <option value="$PROJECT_DIR$/Businessman/index.html" />
         <option value="$PROJECT_DIR$/Admin/GoodsKind/list.html" />
         <option value="$PROJECT_DIR$/Charge/GoodsKind/list.html" />
         <option value="$PROJECT_DIR$/Admin/UserInfo/businessesman_list.html" />
         <option value="$PROJECT_DIR$/Businessman/UserInfo/me.html" />
+        <option value="$PROJECT_DIR$/Businessman/index.html" />
       </list>
     </option>
   </component>
@@ -295,12 +307,12 @@
       <workItem from="1526218893701" duration="189000" />
       <workItem from="1526290058760" duration="2681000" />
       <workItem from="1526378540557" duration="113000" />
-      <workItem from="1527499170762" duration="1674000" />
+      <workItem from="1527499170762" duration="1762000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="77199000" />
+    <option name="totallyTimeSpent" value="77287000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
@@ -598,16 +610,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Businessman/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1065">
-          <caret line="36" column="56" lean-forward="false" selection-start-line="36" selection-start-column="56" selection-end-line="36" selection-end-column="56" />
-          <folding>
-            <marker date="1527499679526" expanded="true" signature="3074:3110" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Admin/OrderForm/order_list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2226">
@@ -667,6 +669,16 @@
         <state relative-caret-position="1308">
           <caret line="77" column="64" lean-forward="true" selection-start-line="77" selection-start-column="64" selection-end-line="77" selection-end-column="64" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Businessman/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-504">
+          <caret line="29" column="43" lean-forward="false" selection-start-line="29" selection-start-column="43" selection-end-line="29" selection-end-column="43" />
+          <folding>
+            <marker date="1527499679526" expanded="true" signature="3074:3110" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
