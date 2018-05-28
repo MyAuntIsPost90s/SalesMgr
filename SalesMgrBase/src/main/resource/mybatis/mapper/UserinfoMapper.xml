@@ -40,6 +40,9 @@
     <if test="email != null" >
       and email = #{email}
     </if>
+    <if test="note != null" >
+      and note = #{note}
+    </if>
   </select>
   
   <select id="getSingle" resultType="salesmgr.base.model.Userinfo" >
@@ -85,7 +88,10 @@
         cardId,
       </if>
       <if test="email != null" >
-        email
+        email,
+      </if>
+      <if test="note != null" >
+        note
       </if>
     </trim>
     <trim prefix="values(" suffix=")" suffixOverrides="," >
@@ -123,7 +129,10 @@
         #{cardid},
       </if>
       <if test="email != null" >
-        #{email}
+        #{email},
+      </if>
+      <if test="note != null" >
+        #{note}
       </if>
     </trim>
   </insert>
@@ -162,7 +171,10 @@
         cardId = #{cardid},
       </if>
       <if test="email != null" >
-        email = #{email}
+        email = #{email},
+      </if>
+      <if test="note != null" >
+        note = #{note}
       </if>
     </set>
     where
@@ -191,8 +203,7 @@
       and password = #{password}
     </if>
     <if test="realname != null" >
-  	  and (userName like CONCAT('%',#{realname},'%')
-      or realName like CONCAT('%',#{realname},'%'))
+      and realName = #{realname}
     </if>
     <if test="createtime != null" >
       and createTime = #{createtime}
@@ -217,6 +228,9 @@
     </if>
     <if test="email != null" >
       and email = #{email}
+    </if>
+    <if test="note != null" >
+      and note = #{note}
     </if>
   </select>
   
@@ -259,9 +273,12 @@
     <if test="email != null" >
       and email = #{email}
     </if>
+    <if test="note != null" >
+      and note = #{note}
+    </if>
   </select>
-
-   <select id="getStaffWithPage" resultType="salesmgr.base.model.Userinfo" parameterType="salesmgr.base.model.Userinfo" >
+  
+  <select id="getStaffWithPage" resultType="salesmgr.base.model.Userinfo" parameterType="salesmgr.base.model.Userinfo" >
     select * from userinfo
     where 1=1
     <if test="usertype == null ">
@@ -297,6 +314,5 @@
   	SELECT SUM(wages) FROM userinfo
 	WHERE userType = 1 OR userType=2 or userType = 3
   </select>
-  
   
 </mapper>

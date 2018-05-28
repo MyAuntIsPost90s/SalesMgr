@@ -9,6 +9,8 @@ public class Goodskind {
 
     private Date goodskindtime;
 
+    private String goodskindnote;
+
     public String getGoodskindid() {
         return goodskindid;
     }
@@ -31,5 +33,13 @@ public class Goodskind {
 
     public void setGoodskindtime(Date goodskindtime) {
         this.goodskindtime = goodskindtime;
+    }
+
+    public String getGoodskindnote() {
+        return goodskindnote;
+    }
+
+    public void setGoodskindnote(String goodskindnote) {
+        this.goodskindnote = goodskindnote;
     }
 }

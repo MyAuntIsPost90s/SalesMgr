@@ -49,6 +49,7 @@ public class OrderFormServiceImpl implements OrderFormService {
 			userOrderDto.setOrderprice(item.getOrderprice());
 			userOrderDto.setOrdertime(item.getOrdertime());
 			userOrderDto.setUserid(item.getUserid());
+			userOrderDto.setOrdertype(item.getOrdertype());
 			userOrderDto.setUserinfo(userInfoService.single(item.getUserid()));
 			list.add(userOrderDto);
 		}

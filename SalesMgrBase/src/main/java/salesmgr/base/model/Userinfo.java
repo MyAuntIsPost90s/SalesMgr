@@ -27,6 +27,8 @@ public class Userinfo {
 
     private String email;
 
+    private String note;
+
     public String getUserid() {
         return userid;
     }
@@ -121,5 +123,13 @@ public class Userinfo {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }

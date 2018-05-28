@@ -99,6 +99,10 @@
                     loginSuccess('Salesman/index.html');
                     return;
                 }
+                if(data.code==1&&data.data.usertype==4){    //分销商
+                    loginSuccess('Businessman/index.html');
+                    return;
+                }
                 if(data.code==1&&data.data.usertype==2){    //采购员
                     loginSuccess('Buyer/index.html');
                     return;

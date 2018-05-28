@@ -80,6 +80,14 @@
                     </div>
                 </div>
             </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">法人</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="note" required placeholder="请输入法人" data-valid="name:'法人',length:[1,20]" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
             <div class="layui-form-item" style="text-align: right">
                 <button type="button" class="layui-btn" onclick="save()">保存</button>
             </div>
@@ -182,7 +190,7 @@
         layer.open({
             type:1
             ,title:'添加商户'
-            ,area:['640px','530px']
+            ,area:['640px','550px']
             ,content:$('#lay-userinfoform').html()
             ,success:function(){
                 $('#inp-username').attr('readonly',false);
@@ -204,7 +212,7 @@
                 layer.open({
                     type:1
                     ,title:'修改商户'
-                    ,area:['640px','530px']
+                    ,area:['640px','550px']
                     ,content:$('#lay-userinfoform').html()
                     ,success:function(){
                         $('#inp-username').attr('readonly',true);
@@ -279,8 +287,9 @@
             },
             {field:'username',width:100,align:'center',title:"用户名"},
             {field:'realname',width:100,align:'center',title:"商户名称"},
+            {field:'note',width:100,align:'center',title:"商户法人"},
             {field:'address',width:100,align:'center',title:"地址"},
-            {field:'phone',width:100,align:'center',title:"手机号"}
+            {field:'phone',width:100,align:'center',title:"手机号"},
         ]];
         return columns;
     }

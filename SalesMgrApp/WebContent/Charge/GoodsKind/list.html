@@ -29,6 +29,13 @@
                 <div class="layui-input-block">
                     <input type="text" name="goodskindname" required  lay-verify="username" placeholder="请输入名称" data-valid="name:'名称',length:[1,20]" autocomplete="off" class="layui-input">
                 </div>
+
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                    <input type="text" name="goodskindnote" required placeholder="请输入备注" data-valid="name:'备注',length:[0,100]" autocomplete="off" class="layui-input">
+                </div>
             </div>
             <div class="layui-form-item" style="text-align: right">
                 <button type="button" class="layui-btn" onclick="save()">保存</button>
@@ -187,7 +194,8 @@
                         +'<button class="layui-btn layui-btn-xs" onclick="showEdit(\'' + val + '\')"><i class="layui-icon">&#xe642;</i>编辑</button>'
                 }
             },
-            {field:'goodskindname',width:100,align:'center',title:"名称"}
+            {field:'goodskindname',width:100,align:'center',title:"名称"},
+            {field:'goodskindnote',width:100,align:'center',title:"名称"}
         ]];
         return columns;
     }

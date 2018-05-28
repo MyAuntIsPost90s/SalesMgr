@@ -13,6 +13,9 @@
     <if test="goodskindtime != null" >
       and goodsKindTime = #{goodskindtime}
     </if>
+    <if test="goodskindnote != null" >
+      and goodsKindNote = #{goodskindnote}
+    </if>
   </select>
   
   <select id="getSingle" resultType="salesmgr.base.model.Goodskind" >
@@ -31,7 +34,10 @@
         goodsKindName,
       </if>
       <if test="goodskindtime != null" >
-        goodsKindTime
+        goodsKindTime,
+      </if>
+      <if test="goodskindnote != null" >
+        goodsKindNote
       </if>
     </trim>
     <trim prefix="values(" suffix=")" suffixOverrides="," >
@@ -42,7 +48,10 @@
         #{goodskindname},
       </if>
       <if test="goodskindtime != null" >
-        #{goodskindtime}
+        #{goodskindtime},
+      </if>
+      <if test="goodskindnote != null" >
+        #{goodskindnote}
       </if>
     </trim>
   </insert>
@@ -54,7 +63,10 @@
         goodsKindName = #{goodskindname},
       </if>
       <if test="goodskindtime != null" >
-        goodsKindTime = #{goodskindtime}
+        goodsKindTime = #{goodskindtime},
+      </if>
+      <if test="goodskindnote != null" >
+        goodsKindNote = #{goodskindnote}
       </if>
     </set>
     where
@@ -82,6 +94,9 @@
     <if test="goodskindtime != null" >
       and goodsKindTime = #{goodskindtime}
     </if>
+    <if test="goodskindnote != null" >
+      and goodsKindNote = #{goodskindnote}
+    </if>
   </select>
   
   <select id="count" resultType="java.lang.Long" parameterType="salesmgr.base.model.Goodskind" >
@@ -95,6 +110,9 @@
     </if>
     <if test="goodskindtime != null" >
       and goodsKindTime = #{goodskindtime}
+    </if>
+    <if test="goodskindnote != null" >
+      and goodsKindNote = #{goodskindnote}
     </if>
   </select>
   
